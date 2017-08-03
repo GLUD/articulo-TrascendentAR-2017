@@ -1,2 +1,2 @@
-# articulo-individual-2017
-Plantilla de Artículo Invididual Revista Colibrí GLUD 2017
+# articulo-trascendentAR-2017
+Revista Colibrí GLUD 2017
