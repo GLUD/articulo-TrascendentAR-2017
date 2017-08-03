@@ -1,0 +1,225 @@
+% Este fichero es parte del Número 5 de la Revista Occam's Razor
+% Revista Occam's Razor Número 5
+%
+% (c)  2010 The Occam's Razor Team
+%
+% Esta obra está bajo una licencia Reconocimiento 2.5 España de Creative
+% Commons. Para ver una copia de esta licencia, visite 
+% http://creativecommons.org/licenses/by/2.5/es/
+% o envie una carta a Creative Commons, 171 Second Street, Suite 300, 
+% San Francisco, California 94105, USA.
+
+% Este .tex contiene el contenido del articulo
+% Seccion (Dejar en blanco)
+%
+
+% Incluye imagen del artículo (Debe ser diferente del Kokopelli! (°_°) Sin embargo, no es obligatoria esta imagen)
+
+%\rput(2.5,-2.3){\resizebox{!}{3.2cm}{{\includegraphics[]{images/nombre_articulo/glud}}}}
+
+
+%Imagen de el comienzo de el articulo, coordenadas desde %la parte superior izquierda del margen de la pagina
+% Las imagenes quedan mejor en formato .eps, agradecería si alguien logra colocar imagenes en dicho formato y comparte la corrección.
+
+% -------------------------------------------------
+% Cabecera
+\begin{flushright}
+\msection{introcolor}{black}{0.35}{Seccion dejar igual}
+
+\mtitle{10cm}{TrascendentAR}
+
+\msubtitle{8cm}{Librería de realidad aumentada para Android}
+
+{\sf Juan Carlos Velandia, Estudiante de Ing. Electrónica\\
+Marlon Arias Cárdenas, Estudiante de Ing. de Sistemas\\
+Laydi Viviana Bautista, Estudiante de Ing. Catastral y Geodesia}
+
+{\psset{linecolor=black,linestyle=dotted}\psline(-12,0)}
+\end{flushright}
+
+\vspace{2mm}
+% -------------------------------------------------
+
+\begin{multicols}{2}
+
+\sectiontext{white}{black}{Resumen}
+
+% Introducción
+\intro{introcolor}{E}{n está oportunidad vamos a presentar una librería que integra fácilmente el framework de ARToolKit en el modulo de android de libGDX, Trascendent-AR, con el fin de ofrecer una herramienta de código abierto para el desarrollo de aplicaciones con Realidad Aumentada. Expondremos la metodología de trabajo que se desarrollo durante el proyecto, herramientas utilizadas como GitHub, Taiga.io y Jekyll, además de la documentación generada bajo el sitio web de trascendentAR. }
+
+\sectiontext{white}{black}{Palabras clave: } Realidad Aumentada, libGDX, ARToolKit, Java, Android
+
+% la introducción del texto. \\
+
+
+\sectiontext{white}{black}{I. Introducción}\\
+Las aplicaciones de realidad aumentada se han popularizado en los últimos años gracias al desarrollo tecnológico, esto lleva a que cada día más desarrolladores se interesen a incursionar en este campo, por lo que requieren herramientas especiales. En el mundo de los videojuegos los motores más populares han integrado librerías como Vuforia y ARToolKit que permitan a los usuarios existentes desarrollar Apps de realidad aumentada, dichos motores usualmente requieren trabajar en lenguajes como C\# o C++. 
+
+\\
+Con el objetivo de dar a los desarrolladores de Android una herramienta de código abierto que les permitiera crear poderosas aplicaciones de realidad aumentada de forma más simple, así desde el grupo GNU/Linux de la Universidad Distrital nació Trascendent-AR, una librería que integra el framework de Realidad Aumentada ARToolKit con el framework de videojuegos libGDX.
+
+\\
+En este punto, usted podría estar confundido con los conceptos de Framework, ARToolkit y libGDX, pero no se preocupe que se lo vamos a explicar, para empezar un framework podría traducirse aproximadamente como un “marco de trabajo” y es básicamente un esquema (un esqueleto, un patrón) para el desarrollo y/o la implementación de una aplicación.
+\\
+
+La \textbf {Realidad Aumentada} es la encargada de estudiar las técnicas que permiten integrar en tiempo real contenido digital con el mundo real, Milgram y Kishino la definen como los entornos en los que “se presentan objetos del mundo real y objetos virtuales de forma conjunta en una única pantalla”. \cite{libroRA}
+
+%{Angulo}{ruta de la imagen}{escala}
+\myfig{0}{images/TrascendentAR/simpleapp_output.png}{1}
+\mycaption{Aplicación demo usando trascendentAR}
+
+\textbf {ARToolKit} es una biblioteca de funciones para el desarrollo rápido de aplicaciones de Realidad Aumentada, entre las características destacables de ARToolKit se encuentra que es Multi-plataforma, es decir, que funciona en gran variedad de sistemas operativos, tiene una comunidad activa, y está bajo GNU General Public License (LGPLv3), a nivel técnico cabe resaltar que facilita el problema del registro de la cámara que es el proceso de posicionar la cámara (posición y rotación) relativamente a los objetos de la escena, dado que existen diferentes métodos orientados a diferentes tecnologías, ARToolKit emplea métodos de visión computacional, de forma que obtiene el posicionamiento relativo de 6 grados de libertad haciendo el seguimiento de marcadores cuadrados en tiempo real. 
+
+\begin{entradilla}
+{\em Herramienta de código abierto que les permitirá crear poderosas aplicaciones de {\color{introcolor}{Realidad Aumentada}} de forma más simple.}
+\end{entradilla}
+ 
+Continuando con los términos empleados inicialmente vamos a seguir con libGDX que se puede definir como  un framework para el desarrollo de videojuegos que provee un amplio abanico de plataformas finales, compatible con Windows, GNU/Linux, Android, iOS,  bajo licencia Apache2 escrito en lenguaje de programación Java. 
+ 
+% Siguiente página
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ebOpage{introcolor}{0.35}{Seccion dejar vacio}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Es así como llegamos a TrascendentAR que ofrece una interfaz de fácil integración de ARToolKit en el módulo de Android de libGDX y se encuentra disponible para toda la comunidad de desarrolladores de videojuegos con libGDX bajo Licencia de Apache, Versión 2.0
+
+% Fin de la introducción.\\
+
+\sectiontext{white}{black}{II. Metodología}
+
+Integrar ambos frameworks requiere inicialmente conocer los servicios que ofrece cada uno de ellos. Por ejemplo, ARToolKit provee entrenamiento y reconocimiento de marcadores, que son imágenes que pueden ser identificadas usando visión computacional, es decir, maneja todo el módulo de visión computacional y nos responde a preguntas como ¿Hay un marcador visible?, ¿Cuál marcador es?, ¿Qué coordenadas tiene dicho marcador en el espacio?
+\\
+
+Por otro lado libGDX provee de forma sencilla el manejo de gráficas, sonido, memoria, entradas táctiles, giroscopio, acelerómetro, vibración, y demás elementos que permiten crear aplicaciones interactivas en 2D y 3D.
+
+\begin{entradilla}
+{\em ... hacemos creer al ojo humano que {\color{introcolor}{existe}} un objeto en el mundo real.} 
+\end{entradilla}
+
+Después de este pequeño análisis se puede saber que la verdadera integración corresponde especialmente a la parte gráfica además del envío de señales por parte del módulo de realidad aumentada. 
+\\
+
+La parte complicada del proceso fue dibujar un objeto 3D en las coordenadas reales provistas por ARToolKit, antes de continuar les advertimos que esta sección va a ser un poco matemática ¿Recuerdan que ARToolKit ofrece las coordenadas reales del marcador? Bueno la forma en que se obtienen dichas coordenadas es en dos  matrices de 4x4, hay que mencionar que la programación de gráficos es pura y física álgebra lineal. 
+\\
+
+Usando dos matrices en conjunto podemos colocar un modelo 3D justo encima del marcador y mostrándolo correctamente en la pantalla hacemos creer al ojo humano que existe un objeto en el mundo real, tal como se ve en la figura 1. 
+\\
+
+La primera matriz es la de proyección de la cámara, transforma las coordenadas de los modelos a coordenadas 2D que corresponden a los pixeles de pantalla, o de forma inversa, tocando la pantalla (2D) proyectar las coordenadas sobre el espacio 3D de la aplicación permitiendo saber si se ha presionado sobre algún objeto.
+\\
+
+La segunda matriz se conoce como la matriz de trasformación del marcador, e indica la posición, rotación y escala del marcador en el espacio.
+
+%\sectiontext{white}{black}{ Subsección de la Metodología} Especifica brevemente elementos y cómo se realiza, en caso de que pueda replicarse.
+
+\sectiontext{white}{black}{Organización del proyecto}
+
+TrascendentAR es un proyecto un tanto ambicioso, para culminarlo se debían cumplir un gran número de tareas que fueron asignadas a cada integrante del equipo, es así que es necesita conocer en que está trabajando tu compañero y que cambios ha hecho a la librería. Por esto utilizamos dos herramientas que facilitaron enormemente el desarrollo de TrascendentAR: GitHub y Taiga.io\\
+
+\sectiontext{white}{black}{Github} es una plataforma de desarrollo colaborativo de software para alojar proyectos utilizando el sistema de control de versiones Git. Lo interesante de esta herramienta es que ofrece diversas funcionalidades en donde se encuentra una wiki para el mantenimiento de las distintas versiones de las páginas, un sistema de seguimiento de problemas que permiten a los miembros del equipo detallar un problema con el software, una herramienta de revisión de código, donde se pueden añadir anotaciones en cualquier punto de un fichero y debatir sobre determinados cambios realizados en un commit específico y un visor de ramas donde se pueden comparar los progresos realizados en las distintas ramas de nuestro repositorio. \cite{github}
+
+
+\resizebox{8cm}{!}{{\myfig{0}{images/TrascendentAR/github-logo.png}{1}}}
+
+\sectiontext{white}{black}{Taiga.io} es una aplicación que gestiona el progreso de un proyecto. Permite integrarse con repositorios de control de versiones basados en la web como GitHub y utiliza metodologías de desarrollo de software ágil e incremental para gestionar el desarrollo de productos como Scrum o Kanban. 
+
+Kanban proveniente de Japón, y se refiere más a una metodología en donde se divide el desarrollo de proyectos en etapas. Es así como Taiga.io se convierte en una gran herramienta de apoyo ofreciendo un tablero Kanban que se utilizamos para gestionar las tareas asignadas a cada uno de los integrantes por medio de tarjetas y estados de avance del proyecto. 
+
+\sectiontext{white}{black}{III. Distribución}
+
+Uno de los objetivos de este proyecto es que sea utilizado por otros desarrolladores de aplicaciones, además de que sea relevante y trascendental... Es aquí en donde una vez finalizado el proyecto trabajamos en una excelente documentación y un sitio web atractivo. 
+
+
+% Siguiente página
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ebOpage{introcolor}{0.35}{Seccion dejar vacio}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\sectiontext{white}{black}{Documentación}\\
+TrascendentAR en si mismo comprende solamente tres clases de Java, por lo que la cantidad de líneas de código es pequeña, cerca de 400 líneas aunque trabajamos bajo la filosofía de que el código en si mismo debe ser autoexplicativo y fácil de entender tomamos la decisión de complementar la documentación por medio de tutoriales publicados en el sitio web del proyecto.
+
+\myfig{0}{images/TrascendentAR/website.png}{1}
+\mycaption{Sitio web de TrascendentAR}
+
+\sectiontext{white}{black}{Sitio Web}\\
+Con respecto al sitio web, sabemos que una buena primera impresión cuenta más de lo que imaginamos, por esa razón decidimos que la portada de TrascendentAR debía ser llamativa y el sitio web debía ser más que una aburrida página en blanco de Github, aún así, existían varios desafíos por considerar:
+
+\begin{itemize}
+    \item \textbf {Tiempo.} No debíamos excedernos más de dos semanas en tener un sitio web funcional y con contenido.
+    \item \textbf {Originalidad.} Elegir un Nombre de Dominio confiable y profesional.
+    \item \textbf {Visibilidad.} La página debía tener atractivo visual.
+    \item \textbf {Accesibilidad.} Ofrecer una curva de aprendizaje suave.
+    
+\end{itemize}
+
+La respuesta de la mayoría de los desafío la encontramos en el uso de Jekyll en conjunto con Github Pages.
+\\
+
+\textbf {Jekyll} es un generador de sitios web estáticos y blogs partir de componentes dinámicos como plantillas además de permitir convertir documentos en texto plano en páginas web cuidadosamente diseñadas. En contraste, \textbf {Github Pages} es un servicio de host provisto por Github y así, desde el mismo repositorio del proyecto en GitHub se genera el sitio web en jekyll, para el caso de Trascendentar el sitio web se despliega en la siguiente dirección  {\color{introcolor}{glud.github.io/trascendentAR}} la cual resulta ser para nuestros propósitos una dirección confiable y lo suficientemente profesional.
+\\ 
+\begin{entradilla}
+{\em Un excelente producto en si mismo no vale nada... {\color{introcolor}{si nadie lo conoce}} }
+\end{entradilla}
+\\
+
+Es necesario señalar que no creamos el sitio web desde cero, por el contrario adaptamos una plantilla de jekyll tomada de {\color{introcolor}{www.jekyllthemes.org}} así logramos ahorrar tiempo además de obtener un sitio web bien diseñado y fácilmente adaptable a diferentes dimensiones de pantalla en un corto periodo de tiempo. 
+\\
+
+No obstante si modificamos en gran medida el código fuente del sitio web, adaptando estilos y añadiendo soporte para otros idiomas obteniendo así mayor alcance en la comunidad, esto lo hemos evidenciado en nuestros primeros usuarios que no saben Español pero si Inglés. Actualmente el sitio web está disponible en Inglés y Español, en donde se pueden encontrar diferentes tutoriales para utilizar TranscendertAR, las especificaciones de la licencia y algunas opciones para contribuir al proyecto en donde también se ofrece el código fuente.
+
+
+
+\bibliographystyle{abbrv}
+\begin{bibliografia}
+\bibitem{libroRA}
+C. Gonzales, D. Vallejo, J. Albusaz \& J, Castro. \emph{Realidad Aumentada. Un Enfoque Práctico con ARToolKit y Blender}, 1rd~ed.\hskip 1em plus
+  0.5em minus 0.4em\relax ISBN: 978-84-686-1151-8. 2012. 
+  
+\bibitem{github}
+ L. Castillo. \emph{¿Qué es GitHub?}, \hskip [Blog Online]
+ Recuperado de: http://conociendogithub.readthedocs.io/
+
+\bibitem{apache2}
+ L. Castillo. \emph{¿Qué es GitHub?}, \hskip [Blog Online]
+ Recuperado de: http://conociendogithub.readthedocs.io/
+
+\end{bibliografia}
+
+%%%%%AUTORES%%%%%%%%%%%%%%%%%5
+
+% añadir fotografía tamaño [2.5 cm x 3.3 cm ] 
+%  |¬_¬|'  La foto es Opcional! , se añade reemplazando:
+% \begin{biografia}{images/mi_articulo/autor.eps}{Nombre Completo del Autor} corta descripción \end{biografia}
+
+\begin{biografia}{}{Juan Carlos Velandia} 
+Estudiante de Ing. Electrónica.\\
+\textbf {Laydi Viviana Bautista} Estudiante de Ing. Catastral y Geodesia.\\
+\textbf {Marlon Arias Cárdena} Estudiante de Ing. de Sistemas.\\
+
+Estudiantes de la Universidad Distrital FJC, Miembros Activos del GLUD - Grupo GNU/Linux Universidad Distrital
+\end{biografia}
+
+
+
+
+\raggedcolumns
+\pagebreak
+
+
+\end{multicols}
+
+\clearpage
+\pagebreak
+
+
+% \begin{center}
+% \resizebox{5cm}{!}{{\epsfbox{images/nombre_articulo/glud.eps}}}
+% \mycaption{Gráfico del movimiento de los datos multimedia desde la generación del fuente hasta que lo escucha el usuario o oyente de la radio o canal de vídeo}
+% \end{center}
+
+%Para añadir un link:
+%\href{https://glud.org/}{Hipervínculo} \\
+%\href{https://blog.desdelinux.net/occamss-razor-publicacion-libre-de-divulgacion-cientifica/}{Acerca de Occam's razor} \\
+
+%\textsf {\textbf {Código original }}
+
