@@ -56,7 +56,7 @@ Laydi Viviana Bautista, Estudiante de Ing. Catastral y Geodesia}
 Las aplicaciones de realidad aumentada se han popularizado en los últimos años gracias al desarrollo tecnológico, esto lleva a que cada día más desarrolladores se interesen a incursionar en este campo, por lo que requieren herramientas especiales. En el mundo de los videojuegos los motores más populares han integrado librerías como Vuforia y ARToolKit que permitan a los usuarios existentes desarrollar Apps de realidad aumentada, dichos motores usualmente requieren trabajar en lenguajes como C\# o C++. 
 
 \\
-Con el objetivo de dar a los desarrolladores de Android una herramienta de código abierto que les permitiera crear poderosas aplicaciones de realidad aumentada de forma más simple, así desde el grupo GNU/Linux de la Universidad Distrital nació Trascendent-AR, una librería que integra el framework de Realidad Aumentada ARToolKit con el framework de videojuegos libGDX.
+Con el objetivo de dar a los desarrolladores de Android una herramienta de código abierto que les permitiera crear poderosas aplicaciones de realidad aumentada de forma más simple, desde el grupo GNU/Linux de la Universidad Distrital nació Trascendent-AR, una librería que integra el framework de Realidad Aumentada ARToolKit con el framework de videojuegos libGDX.
 
 \\
 En este punto, usted podría estar confundido con los conceptos de Framework, ARToolkit y libGDX, pero no se preocupe que se lo vamos a explicar, para empezar un framework podría traducirse aproximadamente como un “marco de trabajo” y es básicamente un esquema (un esqueleto, un patrón) para el desarrollo y/o la implementación de una aplicación.
@@ -105,7 +105,12 @@ La parte complicada del proceso fue dibujar un objeto 3D en las coordenadas real
 Usando dos matrices en conjunto podemos colocar un modelo 3D justo encima del marcador y mostrándolo correctamente en la pantalla hacemos creer al ojo humano que existe un objeto en el mundo real, tal como se ve en la figura 1. 
 \\
 
-La primera matriz es la de proyección de la cámara, transforma las coordenadas de los modelos a coordenadas 2D que corresponden a los pixeles de pantalla, o de forma inversa, tocando la pantalla (2D) proyectar las coordenadas sobre el espacio 3D de la aplicación permitiendo saber si se ha presionado sobre algún objeto.
+La primera matriz es la de proyección de la cámara, transforma las coordenadas de los modelos a coordenadas 2D que corresponden a los pixeles de pantalla, o de forma inversa, tocando la pantalla (2D) proyectar las coordenadas sobre el espacio 3D de la aplicación permitiendo saber si se ha presionado sobre algún objeto. Una forma sencilla de entender la matriz de proyección, es dibujar un cubo sobre un papel; un cubo real es tridimensional pero su dibujo se encuentra en 2 dimensiones.
+\\
+
+\myfig{0}{images/TrascendentAR/projection_cube.png}{1}
+\mycaption{Proyección de un cubo en 3D sobre un plano 2D}
+
 \\
 
 La segunda matriz se conoce como la matriz de trasformación del marcador, e indica la posición, rotación y escala del marcador en el espacio.
